@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="catalogue-title">
+  <title id="catalogue-title">Biomedical image catalogue</title>
+  <g fill="none" stroke="#1e3765" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m6 16.5 18-9 18 9-18 9z" fill="#1e3765" stroke="#1e3765"/>
+    <path d="m8 23.6 16 8 16-8m-32 7.3 16 8 16-8"/>
+    <path d="m17.8 16.4 6.2-3.1 6.2 3.1-6.2 3.1z" fill="#3a7bc8" stroke="#3a7bc8"/>
+  </g>
+</svg>

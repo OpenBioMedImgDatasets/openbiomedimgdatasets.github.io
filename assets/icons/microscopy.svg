@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="microscopy-title">
+  <title id="microscopy-title">Microscopy</title>
+  <g fill="none" stroke="#1e3765" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 37h15a10 10 0 0 0 .3-20M13 41h24l-2-4H15z"/>
+    <g transform="rotate(35 25 16)">
+      <path d="M21 8h8v14h-8zm1-4h6v4h-6zm1 18h4v4h-4z"/>
+    </g>
+    <circle cx="29.5" cy="20" r="2.1" fill="#3a7bc8" stroke="none"/>
+    <path d="M9 30h17m-9 0v3m-3 0h6" stroke="#3a7bc8"/>
+  </g>
+</svg>

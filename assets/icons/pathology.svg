@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="pathology-title">
+  <title id="pathology-title">Histopathology</title>
+  <g fill="none" stroke="#1e3765" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="rotate(-32 24 24)">
+      <rect x="5" y="14" width="38" height="20" rx="2.2"/>
+      <path d="M13.5 14.8v18.4"/>
+      <path d="M21 21c1.3-2.6 3.7-3.1 6.2-1.3 2.2 1.5 4 .8 5.4 2.8 1.3 2-.3 5-2.5 5.4-1.7.2-3.1-1.5-5.3-.8-3.8 1.1-5.8-2-3.8-6.1z" stroke="#3a7bc8"/>
+      <path d="m24.4 22.6.5.2m3.4 1.4.5.2"/>
+    </g>
+  </g>
+</svg>

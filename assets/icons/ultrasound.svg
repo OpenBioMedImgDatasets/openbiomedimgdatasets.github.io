@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="ultrasound-title">
+  <title id="ultrasound-title">Ultrasound</title>
+  <g fill="none" stroke="#1e3765" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.5 8.5a10 10 0 0 1 7 0l14 24a28 28 0 0 1-35 0z"/>
+    <path d="M17.1 14.5a13.7 13.7 0 0 1 13.8 0"/>
+    <path d="M10.5 28.1c4.4 1.7 6.1 1.6 9.4-.4 3.8-2.2 5.4-1 8.1.6 2.5 1.6 5.6 1.4 9.4-.5" stroke="#3a7bc8"/>
+    <path d="M14.6 33.5c3.2 1.1 5.9.6 8.8-1.3m5.9.7 3.5-.5"/>
+  </g>
+</svg>
