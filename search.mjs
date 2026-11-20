@@ -149,25 +149,31 @@ const sequenceTerms = /\b(?:multi ?(?:sequence|contrast|parametric)|mpmri)\b/;
 const pairingTerms =
   /\b(?:paired|(?:patient |subject |specimen )?matched|co registered|co assayed)\b/;
 
+const modalityIcons = new Map([
+  ["CT", "ct"],
+  ["Cone-beam CT", "cone-beam-ct"],
+  ["MRI", "mri"],
+  ["Ultrasound", "ultrasound"],
+  ["Pathology", "pathology"],
+  ["X-ray", "xray"],
+  ["Microscopy", "microscopy"],
+  ["Fundus", "fundus"],
+  ["OCT", "oct"],
+  ["Endoscopy", "endoscopy"],
+  ["Dermoscopy", "dermoscopy"],
+  ["PET", "pet"],
+  ["Mammography", "xray"],
+  ["Clinical photography", "camera"],
+  ["Laboratory photography", "camera"],
+  ["Video", "video"],
+  ["Surgical video", "video"],
+]);
+
 export function iconFor(name) {
+  if (modalityIcons.has(name)) return modalityIcons.get(name);
   const normalized = normalize(name);
   const match = modalityRules.find(([, regex]) => regex.test(normalized))?.[0];
-  return (
-    {
-      CT: "ct",
-      MRI: "mri",
-      Ultrasound: "ultrasound",
-      Pathology: "pathology",
-      "X-ray": "xray",
-      Microscopy: "microscopy",
-      Fundus: "fundus",
-      OCT: "oct",
-      Endoscopy: "endoscopy",
-      Dermoscopy: "dermoscopy",
-      PET: "pet",
-      Mammography: "xray",
-    }[match] || "generic"
-  );
+  return modalityIcons.get(match) || "generic";
 }
 
 function vocabularyRules(base, names) {

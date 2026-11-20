@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="cbct-title">
+  <title id="cbct-title">Cone-beam CT</title>
+  <g fill="none" stroke="#1e3765" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 19v-4a7 7 0 0 1 7-7h16a7 7 0 0 1 7 7v3"/>
+    <rect x="5" y="19" width="8" height="10" rx="2"/>
+    <rect x="37" y="17" width="5" height="16" rx="1.5"/>
+    <path d="m15 24 19-6m-19 6 19 7" stroke="#3a7bc8"/>
+    <circle cx="25" cy="24" r="4"/>
+    <path d="M19 35a6 6 0 0 1 12 0m-6 0v5m-8 0h16"/>
+  </g>
+</svg>

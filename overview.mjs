@@ -65,11 +65,13 @@ const breakdowns = [
   { key: "access", title: "Datasets by access", id: "browse-access" },
 ];
 
+function byDatasetCount([a, countA], [b, countB]) {
+  return countB - countA || a.localeCompare(b, "en");
+}
+
 function statisticsSection(options, total) {
   const charts = breakdowns.map(({ key, title, id, open }) => {
-    const categories = [...options[key]].sort(
-      ([a, ac], [b, bc]) => bc - ac || a.localeCompare(b, "en"),
-    );
+    const categories = [...options[key]].sort(byDatasetCount);
     const rows = categories.map(([value, count]) => {
       const label =
         value === "Unreported"
@@ -97,14 +99,9 @@ function statisticsSection(options, total) {
 export function overviewPage(records) {
   const { entries, options } = indexCatalogue(records);
   const published = entries.map((entry) => entry.record);
-  const names = [
-    "CT",
-    "MRI",
-    "Ultrasound",
-    "Pathology",
-    "X-ray",
-    "Microscopy",
-  ].filter((name) => options.modality.has(name));
+  const featuredModalities = [...options.modality]
+    .sort(byDatasetCount)
+    .slice(0, 12);
   const reportedCount = (counts) =>
     counts.size - (counts.has("Unreported") ? 1 : 0);
   const metrics = [
@@ -115,21 +112,10 @@ export function overviewPage(records) {
       "#browse-modalities",
     ],
     [reportedCount(options.task), "Research tasks", "#browse-tasks"],
-    [
-      published.filter((record) => record.review.status === "curated").length,
-      "Source-reviewed records",
-    ],
   ];
-  return `<section class="hero"><div><h1>Biomedical image<br> datasets</h1><p class="intro">Find imaging cohorts by modality, anatomy and annotation. Check case counts, data licenses and citations at the source.</p>
+  return `<section class="hero"><div><h1>Biomedical image datasets</h1><p class="intro">Find imaging cohorts by modality, anatomy and annotation. Check case counts, data licenses and citations at the source.</p>
   <div class="actions"><a class="button" href="#explore">Explore datasets <span aria-hidden="true">→</span></a><a class="button alt" href="#search">Search by description</a></div></div>
-  <div class="atlas"><div class="atlas-title"><h2>Browse imaging modalities</h2><span aria-hidden="true"></span></div><div class="atlas-grid">${names.map((name) => `<a href="${esc(route("explore", { modality: name }))}">${icon(name, "atlas-icon")}<strong>${esc(name)}</strong><small>${number(options.modality.get(name))} datasets</small></a>`).join("")}</div></div></section>
-  <div class="stats">${metrics
-    .map(([n, label, link]) => {
-      const value = `<b>${number(n)}</b><span>${label}</span>`;
-      return link
-        ? `<a class="stat" href="${esc(link)}">${value}</a>`
-        : `<div class="stat">${value}</div>`;
-    })
-    .join("")}</div>
+  <div class="atlas"><div class="atlas-title"><h2>Browse imaging modalities</h2><span aria-hidden="true"></span></div><div class="atlas-grid">${featuredModalities.map(([name, count]) => `<a href="${esc(route("explore", { modality: name }))}">${icon(name, "atlas-icon")}<strong>${esc(name)}</strong><small>${number(count)} ${count === 1 ? "dataset" : "datasets"}</small></a>`).join("")}</div></div></section>
+  <div class="stats">${metrics.map(([n, label, link]) => `<a class="stat" href="${esc(link)}"><b>${number(n)}</b><span>${label}</span></a>`).join("")}</div>
   <div class="overview-sections">${newsSection(published)}${statisticsSection(options, published.length)}</div>`;
 }
