@@ -810,6 +810,10 @@ td a {
   line-height: 1.24;
   display: block;
 }
+.row-name .release-date {
+  display: block;
+  margin-top: 2px;
+}
 .row-name:hover strong {
   text-decoration: underline;
 }

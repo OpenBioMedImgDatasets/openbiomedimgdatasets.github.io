@@ -6,6 +6,7 @@ import {
   headlineCount,
   number,
   recordSource,
+  releaseDate,
   reviewName,
 } from "./ui.mjs";
 import { componentTerms } from "./search.mjs";
@@ -67,7 +68,7 @@ export function renderRecord(item) {
     .join("");
   return `<div class="dialog-inner"><div class="dialog-bar"><span class="tag">${reviewName(item)}</span><button class="close" data-close autofocus>Close ×</button></div>
   <h2 id="detail-title">${esc(item.name)}</h2>
-  <div class="meta-row">${[item.year, item.version ? "Version " + item.version : "", headlineCount(item.subsets)].filter(Boolean).map(esc).join(" · ")}</div>
+  <div class="meta-row">${[releaseDate(item), item.version ? esc("Version " + item.version) : "", esc(headlineCount(item.subsets))].filter(Boolean).join(" · ")}</div>
   ${coverageSummary(item)}
   <p>${esc(item.summary)}</p><div class="actions">${external(item.homepage, "Dataset source", "button")}<button class="button alt" data-copy-link>Copy record link</button><button class="button alt" data-export>Download metadata</button></div>
   ${item.aliases.length ? `<p class="compact">Also listed as ${esc(item.aliases.join(", "))}</p>` : ""}

@@ -70,6 +70,26 @@ export function byReleaseDate(a, b) {
     a.id.localeCompare(b.id, "en")
   );
 }
+
+const monthNames = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+export function releaseDate({ year, releaseMonth }, classes = "release-date") {
+  const className = esc(classes);
+  if (!Number.isInteger(year))
+    return `<span class="${className}">Release date unreported</span>`;
+
+  const month = releaseMonth?.value;
+  const monthName = monthNames[month - 1];
+  if (!monthName)
+    return `<span class="${className}"><time datetime="${year}">${year}</time><small>Month unreported</small></span>`;
+
+  const isoMonth = `${year}-${String(month).padStart(2, "0")}`;
+  return `<time class="${className}" datetime="${isoMonth}">${monthName} ${year}</time>`;
+}
+
 export function headlineCount(subsets) {
   if (subsets.length > 1) return number(subsets.length) + " subsets";
   const total = subsets.flatMap((s) =>
@@ -136,7 +156,7 @@ export function coverageSummary(item, subsets = item.subsets, compact = false) {
 }
 
 export function datasetCard(item, subsets = item.subsets) {
-  return `<article class="card"><div class="card-top">${icon(subsetValues(subsets, "modalities")[0])}<span class="compact">${esc(item.year || "")}</span></div>
+  return `<article class="card"><div class="card-top">${icon(subsetValues(subsets, "modalities")[0])}${releaseDate(item, "release-date compact")}</div>
     <h3><a class="record-link" href="${detailLink(item.id)}">${esc(item.name)}</a></h3><p>${esc(item.summary)}</p>
     ${coverageSummary(item, subsets, true)}<div class="card-foot"><strong>${esc(headlineCount(subsets))}</strong></div></article>`;
 }

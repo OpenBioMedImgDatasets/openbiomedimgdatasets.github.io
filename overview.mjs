@@ -6,6 +6,7 @@ import {
   esc,
   icon,
   number,
+  releaseDate,
   route,
 } from "./ui.mjs";
 
@@ -16,33 +17,10 @@ export function latestReleases(records) {
     .slice(0, 10);
 }
 
-const monthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
-function newsDate(record) {
-  const month = record.releaseMonth?.value;
-  if (!month)
-    return `<span class="release-date"><time datetime="${record.year}">${record.year}</time><small>Month unreported</small></span>`;
-  const isoMonth = record.year + "-" + String(month).padStart(2, "0");
-  return `<time class="release-date" datetime="${isoMonth}">${monthNames[month - 1]} ${record.year}</time>`;
-}
-
 function newsSection(records) {
   const rows = latestReleases(records).map((record) => {
     return `<li class="release-row">
-      ${newsDate(record)}
+      ${releaseDate(record)}
       <div class="release-info"><a class="record-link" href="${esc(route("overview", { dataset: record.id }))}"><strong>${esc(record.name)}</strong></a>
       ${coverageSummary(record, record.subsets, true)}</div></li>`;
   });

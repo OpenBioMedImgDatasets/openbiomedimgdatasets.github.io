@@ -10,6 +10,7 @@ import {
   icon,
   number,
   optionList,
+  releaseDate,
   route,
 } from "./ui.mjs";
 import {
@@ -38,7 +39,7 @@ function tableRows(rows) {
       ({
         record: r,
         subsets: s,
-      }) => `<tr><td><a class="row-name" href="${detailLink(r.id)}">${icon(subsetValues(s, "modalities")[0])}<span><strong>${esc(r.name)}</strong><small>${esc(r.year || "Year unreported")}</small></span></a>
+      }) => `<tr><td><a class="row-name" href="${detailLink(r.id)}">${icon(subsetValues(s, "modalities")[0])}<span><strong>${esc(r.name)}</strong>${releaseDate(r, "release-date compact")}</span></a>
   <div class="table-small-mode compact"><b>Modalities</b> ${coverageValue(r, s, "modalities")}</div>
   <div class="table-mobile-meta compact"><b>Tasks</b> ${coverageValue(r, s, "tasks", 3)}</div></td>
   <td>${coverageValue(r, s, "modalities")}</td><td>${coverageValue(r, s, "tasks", 3)}</td>
