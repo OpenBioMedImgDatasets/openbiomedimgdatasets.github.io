@@ -30,6 +30,7 @@ export const groups = [
   { key: "modality", title: "Imaging modality", field: "modalities" },
   { key: "task", title: "Research task", field: "tasks" },
   { key: "coverage", title: "Dataset coverage" },
+  { key: "year", title: "Release year" },
   { key: "anatomy", title: "Anatomy", field: "anatomy" },
   { key: "target", title: "Labeled target", field: "targets" },
   { key: "annotation", title: "Annotation type", field: "annotations" },
@@ -113,6 +114,7 @@ export function indexCatalogue(records) {
     const record = { ...source, subsets: imaging };
     const global = {
       coverage: collectionFeatures(source, imaging),
+      year: [Number.isInteger(record.year) ? String(record.year) : "Unreported"],
     };
     const info = [record.name, ...record.aliases];
     if (source.subsets.length === 1) info.push(record.summary);

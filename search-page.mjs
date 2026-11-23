@@ -76,6 +76,7 @@ export function searchPage(records, params) {
     }
   }
   return `<div class="page-intro"><h1>Search by description</h1><p class="intro">Describe the images and labels you need. Search matches your request to records in the curated lists and links each candidate to its evidence.</p></div>
+  <div class="search-notice" role="note">Under development</div>
   <form id="search-form" class="search-form"><label for="request">What data do you need?</label><textarea id="request" name="q" rows="3" required placeholder="e.g. Chest CT scans with primary lung tumor masks">${esc(raw)}</textarea>
   <div class="actions"><button type="submit" class="button">Find datasets <span aria-hidden="true">→</span></button></div></form>
   <div class="examples" aria-label="Example searches">${examplesHtml}</div>${body}`;

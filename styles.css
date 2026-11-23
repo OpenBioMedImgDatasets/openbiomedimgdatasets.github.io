@@ -1068,11 +1068,20 @@ pre {
 dialog .actions {
   margin: 10px 0;
 }
+.search-notice,
 .gap-note {
   background: #fef3ce;
   border-inline-start: 3px solid var(--gold);
   padding: 11px 14px;
   border-radius: 5px;
+}
+.search-notice {
+  max-width: 920px;
+  margin-bottom: 14px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.gap-note {
   margin-top: 12px;
 }
 .gap-note ul {

@@ -26,6 +26,7 @@ const SHORT_LIST = 5;
 const pageLink = (args) => esc(route("explore", args));
 const valueLabel = (key, value) =>
   key === "access" ? accessNames[value] || value : value;
+const chipPrefixes = { anatomy: "Anatomy", target: "Target", year: "Year" };
 
 const searchIcon =
   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.4 4.4"/></svg>';
@@ -58,12 +59,19 @@ function optionRow(key, value) {
   </li>`;
 }
 
+function sortFacetOptions(options, key, counts) {
+  return [...options].sort(([a], [b]) => {
+    if (key === "year") return (Number(b) || 0) - (Number(a) || 0);
+    return (
+      (counts.get(b) || 0) - (counts.get(a) || 0) ||
+      valueLabel(key, a).localeCompare(valueLabel(key, b))
+    );
+  });
+}
+
 function facetGroup(group, values) {
   const { key, title } = group;
-  const sorted = [...values].sort(
-    ([a, ac], [b, bc]) =>
-      bc - ac || valueLabel(key, a).localeCompare(valueLabel(key, b)),
-  );
+  const sorted = sortFacetOptions(values, key, values);
   return `<details class="facet-group" data-group="${key}" ${key === "modality" ? "open" : ""}>
     <summary><span>${title}</span><span class="selection-count" hidden></span></summary>
     <div class="facet-body">
@@ -189,11 +197,7 @@ function updateGroup(group, active, counts, initial) {
     const countNode = row.querySelector(".option-count");
     if (countNode.textContent !== count) countNode.textContent = count;
   }
-  const ranked = [...group.rows].sort(
-    ([a], [b]) =>
-      (counts.get(b) || 0) - (counts.get(a) || 0) ||
-      valueLabel(group.key, a).localeCompare(valueLabel(group.key, b)),
-  );
+  const ranked = sortFacetOptions(group.rows, group.key, counts);
   if (ranked.some(([, row], index) => group.list.children[index] !== row)) {
     group.rows = new Map(ranked);
     group.list.append(...group.rows.values());
@@ -399,12 +403,8 @@ export function mountExplore(main, records, navigate) {
       for (const side of ["include", "exclude"])
         for (const value of active[key][side]) {
           const label = valueLabel(key, value);
-          const caption =
-            key === "anatomy"
-              ? "Anatomy · " + label
-              : key === "target"
-                ? "Target · " + label
-                : label;
+          const prefix = chipPrefixes[key];
+          const caption = prefix ? `${prefix} · ${label}` : label;
           applied.push(
             chip(
               (side === "exclude" ? "− " : "✓ ") + caption,
